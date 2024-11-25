@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manutenções Frota Ypióca</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Tela Inicial -->
+    <div id="tela-inicial">
+        <h1>Manutenções Frota Ypióca</h1>
+        <button onclick="entrar()">Entrar</button>
+    </div>
+
+    <!-- Tela de Opções -->
+    <div id="tela-opcoes" style="display:none;">
+        <h2>Escolha uma opção</h2>
+        <button onclick="mostrarManutencaoPendentes()">Manutenções Pendentes</button>
+        <button onclick="mostrarCadastrarManutencao()">Cadastrar Manutenção</button>
+    </div>
+
+    <!-- Manutenções Pendentes -->
+    <div id="manutencao-pendentes" style="display:none;">
+        <h2>Manutenções Pendentes</h2>
+        <div id="placas-pendentes">
+            <!-- Placas dos veículos vão ser inseridas aqui -->
+        </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
+    </div>
+
+    <!-- Cadastrar Manutenção -->
+    <div id="cadastrar-manutencao" style="display:none;">
+        <h2>Cadastrar Manutenção</h2>
+        <div id="placas-cadastro">
+            <!-- Placas dos veículos vão ser inseridas aqui -->
+        </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
