@@ -28,13 +28,7 @@ button:hover {
     background-color: #2980b9;
 }
 
-#placas-pendentes, #placas-cadastro {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.placa-button {
+.placa-button, .preventiva-button {
     margin: 10px;
     padding: 10px;
     background-color: #2ecc71;
@@ -44,22 +38,14 @@ button:hover {
     cursor: pointer;
 }
 
-.placa-button:hover {
+.placa-button:hover, .preventiva-button:hover {
     background-color: #27ae60;
 }
 
-.manutencao-list {
+.preventiva-list {
     margin: 10px;
     padding: 10px;
     background-color: #ecf0f1;
     border-radius: 5px;
     margin-top: 5px;
-}
-
-.manutencao-button {
-    background-color: #e74c3c;
-}
-
-.manutencao-button:hover {
-    background-color: #c0392b;
 }
