@@ -18,6 +18,8 @@
         <h2>Escolha uma opção</h2>
         <button onclick="mostrarManutencaoPendentes()">Manutenções Pendentes</button>
         <button onclick="mostrarCadastrarManutencao()">Cadastrar Manutenção</button>
+        <button onclick="mostrarCadastrarPreventivaAdm()">Cadastrar Preventiva-Adm</button>
+        <button onclick="mostrarStatusPreventiva()">Status Preventiva</button>
     </div>
 
     <!-- Manutenções Pendentes -->
@@ -38,8 +40,27 @@
         <button onclick="voltarParaOpcoes()">Voltar</button>
     </div>
 
+    <!-- Cadastrar Preventiva-Adm -->
+    <div id="cadastrar-preventiva-adm" style="display:none;">
+        <h2>Cadastrar Preventiva-Adm</h2>
+        <div id="placas-preventiva">
+            <!-- Placas dos veículos vão ser inseridas aqui -->
+        </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
+    </div>
+
+    <!-- Status Preventiva -->
+    <div id="status-preventiva" style="display:none;">
+        <h2>Status Preventiva</h2>
+        <div id="status-preventiva-list">
+            <!-- Informações de preventivas cadastradas vão ser exibidas aqui -->
+        </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
