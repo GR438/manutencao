@@ -164,4 +164,3 @@ function mostrarStatusPreventivaPorPlaca(placa) {
 
 // Carregar dados ao inicializar
 carregarDados();
-
