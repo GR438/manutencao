@@ -3,19 +3,9 @@ const placas = [
     "PMX0879", "OSU4375", "OSU4025", "NUX8074", "HWX4232", "HWX4222", "HWK8419"
 ];
 
-let manutencoes = {};
 let preventivas = {};
 
 // Carregar dados do localStorage
-function carregarManutencoes() {
-    const dadosSalvos = localStorage.getItem('manutencoes');
-    if (dadosSalvos) {
-        manutencoes = JSON.parse(dadosSalvos);
-    } else {
-        manutencoes = {};  // Inicializa como um objeto vazio caso não haja dados
-    }
-}
-
 function carregarPreventivas() {
     const dadosSalvos = localStorage.getItem('preventivas');
     if (dadosSalvos) {
@@ -26,10 +16,6 @@ function carregarPreventivas() {
 }
 
 // Salvar dados no localStorage
-function salvarManutencoes() {
-    localStorage.setItem('manutencoes', JSON.stringify(manutencoes));
-}
-
 function salvarPreventivas() {
     localStorage.setItem('preventivas', JSON.stringify(preventivas));
 }
@@ -101,14 +87,15 @@ function voltarParaOpcoes() {
 
 // Função para cadastrar preventiva-adm
 function cadastrarPreventivaAdm(placa) {
+    const preventiva = prompt("Informe o tipo de preventiva (ex: troca de óleo, calibragem, etc.):");
     const data = prompt("Informe a data da preventiva:");
     const proximaPreventiva = prompt("Informe a próxima data da preventiva:");
 
-    if (data && proximaPreventiva) {
+    if (preventiva && data && proximaPreventiva) {
         if (!preventivas[placa]) {
             preventivas[placa] = [];
         }
-        preventivas[placa].push({ data, proximaPreventiva });
+        preventivas[placa].push({ preventiva, data, proximaPreventiva });
         salvarPreventivas();
         alert("Preventiva cadastrada com sucesso!");
     }
@@ -127,10 +114,10 @@ function mostrarStatusPreventivaPorPlaca(placa) {
     } else {
         preventivasPlaca.forEach((preventiva, index) => {
             const p = document.createElement("p");
-            p.innerText = `Preventiva: ${preventiva.data} - Próxima Preventiva: ${preventiva.proximaPreventiva}`;
+            p.innerText = `Tipo: ${preventiva.preventiva} | Data: ${preventiva.data} | Próxima Preventiva: ${preventiva.proximaPreventiva}`;
             const concluirButton = document.createElement("button");
             concluirButton.classList.add("preventiva-button");
-            concluirButton.innerText = "Concluir Preventiva";
+            concluirButton.innerText = "Encerrar Preventiva";
             concluirButton.onclick = () => concluirPreventiva(placa, index);
             preventivaList.appendChild(p);
             preventivaList.appendChild(concluirButton);
@@ -148,6 +135,6 @@ function concluirPreventiva(placa, index) {
     mostrarStatusPreventivaPorPlaca(placa); // Atualiza a lista
 }
 
-// Carregar dados ao iniciar
-carregarManutencoes();
+// Carregar as preventivas ao iniciar
 carregarPreventivas();
+
