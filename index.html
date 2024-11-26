@@ -1,68 +1,67 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manutenções Fota Ypioca</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Manutenções Frota Ypióca</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <!-- Tela Inicial -->
     <div id="tela-inicial">
-        <h1>Manutenções Fota Ypioca</h1>
-        <button id="entrar-btn">Entrar</button>
+        <h1>Manutenções Frota Ypióca</h1>
+        <button onclick="entrar()">Entrar</button>
     </div>
 
-    <!-- Tela Principal (aparece após clicar em Entrar) -->
-    <div id="tela-principal" style="display: none;">
-        <button class="tela-btn" onclick="mostrarTela('manutencao-pendente')">Manutenções Pendentes</button>
-        <button class="tela-btn" onclick="mostrarTela('status-preventiva')">Status Preventiva</button>
-        <button class="tela-btn" onclick="mostrarTela('cadastrar-manutencao')">Cadastrar Manutenção</button>
-        <button class="tela-btn" onclick="mostrarTela('cadastrar-preventiva')">Cadastrar Preventiva Adm</button>
+    <!-- Tela de Opções -->
+    <div id="tela-opcoes" style="display:none;">
+        <h2>Escolha uma opção</h2>
+        <button onclick="mostrarManutencaoPendentes()">Manutenções Pendentes</button>
+        <button onclick="mostrarCadastrarManutencao()">Cadastrar Manutenção</button>
+        <button onclick="mostrarCadastrarPreventivaAdm()">Cadastrar Preventiva-Adm</button>
+        <button onclick="mostrarStatusPreventiva()">Status Preventiva</button>
     </div>
 
-    <!-- Tela Cadastrar Manutenção -->
-    <div id="cadastrar-manutencao" class="tela" style="display: none;">
-        <h2>Escolha uma Placa</h2>
-        <div id="placas-container"></div>
-        <div id="cadastro-manutencao-form" style="display: none;">
-            <label>Descreva a manutenção a ser cadastrada:</label>
-            <input type="text" id="descricao-manutencao">
-            <button onclick="salvarManutencao()">Salvar</button>
-        </div>
-    </div>
-
-    <!-- Tela Manutenções Pendentes -->
-    <div id="manutencao-pendente" class="tela" style="display: none;">
+    <!-- Manutenções Pendentes -->
+    <div id="manutencao-pendentes" style="display:none;">
         <h2>Manutenções Pendentes</h2>
-        <div id="manutencao-pendente-container"></div>
-    </div>
-
-    <!-- Tela Cadastrar Preventiva Adm -->
-    <div id="cadastrar-preventiva" class="tela" style="display: none;">
-        <h2>Escolha uma Placa</h2>
-        <div id="placas-container-preventiva"></div>
-        <div id="cadastro-preventiva-form" style="display: none;">
-            <label>Qual o tipo de preventiva?</label>
-            <input type="text" id="tipo-preventiva">
-            <label>Qual a data da preventiva?</label>
-            <input type="date" id="data-preventiva">
-            <label>Qual a data da próxima preventiva?</label>
-            <input type="date" id="proxima-preventiva">
-            <button onclick="salvarPreventiva()">Salvar</button>
+        <div id="placas-pendentes">
+            <!-- Placas dos veículos vão ser inseridas aqui -->
         </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
     </div>
 
-    <!-- Tela Status Preventiva -->
-    <div id="status-preventiva" class="tela" style="display: none;">
+    <!-- Cadastrar Manutenção -->
+    <div id="cadastrar-manutencao" style="display:none;">
+        <h2>Cadastrar Manutenção</h2>
+        <div id="placas-cadastro">
+            <!-- Placas dos veículos vão ser inseridas aqui -->
+        </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
+    </div>
+
+    <!-- Cadastrar Preventiva-Adm -->
+    <div id="cadastrar-preventiva-adm" style="display:none;">
+        <h2>Cadastrar Preventiva-Adm</h2>
+        <div id="placas-preventiva">
+            <!-- Placas dos veículos vão ser inseridas aqui -->
+        </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
+    </div>
+
+    <!-- Status Preventiva -->
+    <div id="status-preventiva" style="display:none;">
         <h2>Status Preventiva</h2>
-        <div id="status-preventiva-container"></div>
+        <div id="status-preventiva-list">
+            <!-- Informações de preventivas cadastradas vão ser exibidas aqui -->
+        </div>
+        <button onclick="voltarParaOpcoes()">Voltar</button>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
