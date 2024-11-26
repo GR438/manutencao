@@ -1,13 +1,22 @@
-// Lista de placas dos veículos
 const placas = [
     "PNE6975", "PNE6925", "PNE6855", "PND9445", "PMX1039", "PMX0959", 
     "PMX0879", "OSU4375", "OSU4025", "NUX8074", "HWX4232", "HWX4222", "HWK8419"
 ];
-
-// Armazenamento das manutenções cadastradas
 let manutencoes = {};
 
-// Função para inicializar a tela de manutenções pendentes ou cadastro
+function carregarManutencoes() {
+    // Tenta carregar os dados da localStorage
+    const dadosSalvos = localStorage.getItem('manutencoes');
+    if (dadosSalvos) {
+        manutencoes = JSON.parse(dadosSalvos);
+    }
+}
+
+function salvarManutencoes() {
+    // Salva os dados no localStorage
+    localStorage.setItem('manutencoes', JSON.stringify(manutencoes));
+}
+
 function inicializarPlacas() {
     // Manutenções Pendentes
     const placasPendentesDiv = document.getElementById("placas-pendentes");
@@ -20,7 +29,6 @@ function inicializarPlacas() {
         placasPendentesDiv.appendChild(button);
     });
 
-    // Cadastrar Manutenção
     const placasCadastroDiv = document.getElementById("placas-cadastro");
     placasCadastroDiv.innerHTML = "";
     placas.forEach(placa => {
@@ -32,34 +40,29 @@ function inicializarPlacas() {
     });
 }
 
-// Função para exibir tela inicial
 function entrar() {
     document.getElementById("tela-inicial").style.display = "none";
     document.getElementById("tela-opcoes").style.display = "block";
 }
 
-// Função para mostrar as manutenções pendentes
 function mostrarManutencaoPendentes() {
     document.getElementById("tela-opcoes").style.display = "none";
     document.getElementById("manutencao-pendentes").style.display = "block";
     inicializarPlacas();
 }
 
-// Função para mostrar o formulário de cadastro
 function mostrarCadastrarManutencao() {
     document.getElementById("tela-opcoes").style.display = "none";
     document.getElementById("cadastrar-manutencao").style.display = "block";
     inicializarPlacas();
 }
 
-// Função para voltar para a tela de opções
 function voltarParaOpcoes() {
     document.getElementById("manutencao-pendentes").style.display = "none";
     document.getElementById("cadastrar-manutencao").style.display = "none";
     document.getElementById("tela-opcoes").style.display = "block";
 }
 
-// Função para mostrar manutenções de uma placa
 function mostrarManutencaoPorPlaca(placa) {
     const manutencaoList = document.createElement("div");
     manutencaoList.classList.add("manutencao-list");
@@ -80,7 +83,6 @@ function mostrarManutencaoPorPlaca(placa) {
     document.getElementById("placas-pendentes").appendChild(manutencaoList);
 }
 
-// Função para cadastrar uma nova manutenção
 function cadastrarManutencao(placa) {
     const manutencaoDescricao = prompt("Cadastre a nova manutenção para " + placa);
     if (manutencaoDescricao) {
@@ -88,12 +90,17 @@ function cadastrarManutencao(placa) {
             manutencoes[placa] = [];
         }
         manutencoes[placa].push(manutencaoDescricao);
+        salvarManutencoes();  // Salva após adicionar a nova manutenção
         alert("Manutenção cadastrada com sucesso!");
     }
 }
 
-// Função para concluir uma manutenção
 function concluirManutencao(placa, index) {
     manutencoes[placa].splice(index, 1); // Remove a manutenção da lista
+    salvarManutencoes();  // Salva após concluir a manutenção
     mostrarManutencaoPorPlaca(placa); // Atualiza a lista
 }
+
+// Carregar as manutenções ao iniciar
+carregarManutencoes();
+
