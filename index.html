@@ -18,7 +18,7 @@
         <h2>Escolha uma opção</h2>
         <button onclick="mostrarManutencaoPendentes()">Manutenções Pendentes</button>
         <button onclick="mostrarCadastrarManutencao()">Cadastrar Manutenção</button>
-        <button onclick="mostrarCadastrarPreventivaAdm()">Cadastrar Preventiva-Adm</button>
+        <button onclick="mostrarCadastrarPreventivaAdm()">Cadastrar Preventiva Adm</button>
         <button onclick="mostrarStatusPreventiva()">Status Preventiva</button>
     </div>
 
@@ -26,7 +26,7 @@
     <div id="manutencao-pendentes" style="display:none;">
         <h2>Manutenções Pendentes</h2>
         <div id="placas-pendentes">
-            <!-- Placas das manutenções pendentes serão carregadas aqui -->
+            <!-- Placas dos veículos vão ser inseridas aqui -->
         </div>
         <button onclick="voltarParaOpcoes()">Voltar</button>
     </div>
@@ -35,16 +35,16 @@
     <div id="cadastrar-manutencao" style="display:none;">
         <h2>Cadastrar Manutenção</h2>
         <div id="placas-cadastro">
-            <!-- Placas de veículos serão carregadas aqui -->
+            <!-- Placas dos veículos vão ser inseridas aqui -->
         </div>
         <button onclick="voltarParaOpcoes()">Voltar</button>
     </div>
 
-    <!-- Cadastrar Preventiva-Adm -->
+    <!-- Cadastrar Preventiva Adm -->
     <div id="cadastrar-preventiva-adm" style="display:none;">
-        <h2>Cadastrar Preventiva-Adm</h2>
-        <div id="placas-preventiva">
-            <!-- Placas para cadastro de preventiva -->
+        <h2>Cadastrar Preventiva Adm</h2>
+        <div id="placas-preventiva-adm">
+            <!-- Placas dos veículos vão ser inseridas aqui -->
         </div>
         <button onclick="voltarParaOpcoes()">Voltar</button>
     </div>
@@ -53,10 +53,15 @@
     <div id="status-preventiva" style="display:none;">
         <h2>Status Preventiva</h2>
         <div id="status-preventiva-list">
-            <!-- Status das preventivas serão exibidas aqui -->
+            <!-- Placas e status vão ser inseridos aqui -->
         </div>
         <button onclick="voltarParaOpcoes()">Voltar</button>
     </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
 
     <script src="script.js"></script>
 </body>
