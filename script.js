@@ -10,6 +10,8 @@ function carregarManutencoes() {
     const dadosSalvos = localStorage.getItem('manutencoes');
     if (dadosSalvos) {
         manutencoes = JSON.parse(dadosSalvos);
+    } else {
+        manutencoes = {};  // Inicializa como um objeto vazio caso não haja dados
     }
 }
 
@@ -17,6 +19,8 @@ function carregarPreventivas() {
     const dadosSalvos = localStorage.getItem('preventivas');
     if (dadosSalvos) {
         preventivas = JSON.parse(dadosSalvos);
+    } else {
+        preventivas = {};  // Inicializa como um objeto vazio caso não haja dados
     }
 }
 
@@ -164,6 +168,8 @@ function mostrarStatusPreventivas() {
     });
 }
 
+// Carregar as manutenções e preventivas ao iniciar
 carregarManutencoes();
 carregarPreventivas();
+
 
