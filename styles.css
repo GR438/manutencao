@@ -1,49 +1,53 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
+    background-color: #f4f4f4;
 }
 
 h1, h2 {
-    color: #333;
+    text-align: center;
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-    background-color: #4CAF50;
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px auto;
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #2980b9;
 }
 
-.tela {
-    display: none;
+.placa-button, .preventiva-button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#placas-container, #placas-container-preventiva, #manutencao-pendente-container, #status-preventiva-container {
-    margin-top: 20px;
+.placa-button:hover, .preventiva-button:hover {
+    background-color: #27ae60;
 }
 
-button.placa {
-    background-color: #2196F3;
-    margin: 5px;
+.preventiva-list {
+    margin: 10px;
+    padding: 10px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    margin-top: 5px;
 }
 
-button.placa:hover {
-    background-color: #0b7dda;
-}
-
-    button {
-        width: 100%;
-    }
-}
 
