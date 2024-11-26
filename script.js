@@ -3,7 +3,7 @@ const placas = [
     "PMX0879", "OSU4375", "OSU4025", "NUX8074", "HWX4232", "HWX4222", "HWK8419"
 ];
 
-let preventivas = {};
+let preventivas = {};  // Armazenará as preventivas por placa
 
 // Carregar dados do localStorage
 function carregarPreventivas() {
@@ -20,7 +20,7 @@ function salvarPreventivas() {
     localStorage.setItem('preventivas', JSON.stringify(preventivas));
 }
 
-// Inicializar as placas
+// Inicializar as placas para interação
 function inicializarPlacas() {
     // Tela de Cadastrar Preventiva-Adm
     const placasPreventivaDiv = document.getElementById("placas-preventiva");
@@ -128,13 +128,14 @@ function mostrarStatusPreventivaPorPlaca(placa) {
     document.getElementById("status-preventiva-list").appendChild(preventivaList);
 }
 
-// Função para concluir uma preventiva
+// Função para encerrar a preventiva
 function concluirPreventiva(placa, index) {
-    preventivas[placa].splice(index, 1); // Remove a preventiva da lista
+    preventivas[placa].splice(index, 1);  // Remove a preventiva da lista
     salvarPreventivas();
-    mostrarStatusPreventivaPorPlaca(placa); // Atualiza a lista
+    mostrarStatusPreventivaPorPlaca(placa);  // Atualiza a lista
 }
 
 // Carregar as preventivas ao iniciar
 carregarPreventivas();
+
 
