@@ -3,45 +3,55 @@ const placas = [
     "PMX0879", "OSU4375", "OSU4025", "NUX8074", "HWX4232", "HWX4222", "HWK8419"
 ];
 
+let manutencoes = {};  // Armazenará as manutenções por placa
 let preventivas = {};  // Armazenará as preventivas por placa
 
 // Carregar dados do localStorage
-function carregarPreventivas() {
-    const dadosSalvos = localStorage.getItem('preventivas');
-    if (dadosSalvos) {
-        preventivas = JSON.parse(dadosSalvos);
+function carregarDados() {
+    const dadosManutencao = localStorage.getItem('manutencoes');
+    const dadosPreventiva = localStorage.getItem('preventivas');
+    
+    if (dadosManutencao) {
+        manutencoes = JSON.parse(dadosManutencao);
+    } else {
+        manutencoes = {};  // Inicializa como um objeto vazio caso não haja dados
+    }
+
+    if (dadosPreventiva) {
+        preventivas = JSON.parse(dadosPreventiva);
     } else {
         preventivas = {};  // Inicializa como um objeto vazio caso não haja dados
     }
 }
 
 // Salvar dados no localStorage
-function salvarPreventivas() {
+function salvarDados() {
+    localStorage.setItem('manutencoes', JSON.stringify(manutencoes));
     localStorage.setItem('preventivas', JSON.stringify(preventivas));
 }
 
 // Inicializar as placas para interação
 function inicializarPlacas() {
-    // Tela de Cadastrar Preventiva-Adm
-    const placasPreventivaDiv = document.getElementById("placas-preventiva");
-    placasPreventivaDiv.innerHTML = "";
+    // Tela de Cadastrar Manutenção
+    const placasCadastroDiv = document.getElementById("placas-cadastro");
+    placasCadastroDiv.innerHTML = "";
     placas.forEach(placa => {
         const button = document.createElement("button");
         button.innerText = placa;
         button.classList.add("placa-button");
-        button.onclick = () => cadastrarPreventivaAdm(placa);
-        placasPreventivaDiv.appendChild(button);
+        button.onclick = () => cadastrarManutencao(placa);
+        placasCadastroDiv.appendChild(button);
     });
 
-    // Tela de Status Preventiva
-    const statusPreventivaDiv = document.getElementById("status-preventiva-list");
-    statusPreventivaDiv.innerHTML = "";
+    // Tela de Manutenções Pendentes
+    const placasPendentesDiv = document.getElementById("placas-pendentes");
+    placasPendentesDiv.innerHTML = "";
     placas.forEach(placa => {
         const button = document.createElement("button");
         button.innerText = placa;
         button.classList.add("placa-button");
-        button.onclick = () => mostrarStatusPreventivaPorPlaca(placa);
-        statusPreventivaDiv.appendChild(button);
+        button.onclick = () => mostrarManutencaoPendentesPorPlaca(placa);
+        placasPendentesDiv.appendChild(button);
     });
 }
 
@@ -85,23 +95,70 @@ function voltarParaOpcoes() {
     document.getElementById("tela-opcoes").style.display = "block";
 }
 
-// Função para cadastrar preventiva-adm
-function cadastrarPreventivaAdm(placa) {
-    const preventiva = prompt("Informe o tipo de preventiva (ex: troca de óleo, calibragem, etc.):");
-    const data = prompt("Informe a data da preventiva:");
-    const proximaPreventiva = prompt("Informe a próxima data da preventiva:");
+// Função para cadastrar manutenção
+function cadastrarManutencao(placa) {
+    const manutencao = prompt("Informe o tipo de manutenção (ex: troca de óleo, revisão, etc.):");
 
-    if (preventiva && data && proximaPreventiva) {
+    if (manutencao) {
+        if (!manutencoes[placa]) {
+            manutencoes[placa] = [];
+        }
+        manutencoes[placa].push(manutencao);
+        salvarDados();
+        alert("Manutenção cadastrada com sucesso!");
+    }
+}
+
+// Função para mostrar manutenções pendentes de uma placa
+function mostrarManutencaoPendentesPorPlaca(placa) {
+    const manutencaoList = document.createElement("div");
+    manutencaoList.classList.add("manutencao-list");
+
+    const manutencoesPlaca = manutencoes[placa] || [];
+    if (manutencoesPlaca.length === 0) {
+        const p = document.createElement("p");
+        p.innerText = `Nenhuma manutenção cadastrada para a placa ${placa}.`;
+        manutencaoList.appendChild(p);
+    } else {
+        manutencoesPlaca.forEach((manutencao, index) => {
+            const p = document.createElement("p");
+            p.innerText = `Manutenção: ${manutencao}`;
+            const concluirButton = document.createElement("button");
+            concluirButton.innerText = "Encerrar Manutenção";
+            concluirButton.onclick = () => encerrarManutencao(placa, index);
+            manutencaoList.appendChild(p);
+            manutencaoList.appendChild(concluirButton);
+        });
+    }
+
+    document.getElementById("placas-pendentes").innerHTML = "";
+    document.getElementById("placas-pendentes").appendChild(manutencaoList);
+}
+
+// Função para encerrar (remover) a manutenção
+function encerrarManutencao(placa, index) {
+    manutencoes[placa].splice(index, 1);  // Remove a manutenção
+    salvarDados();  // Salva as mudanças
+    mostrarManutencaoPendentesPorPlaca(placa);  // Atualiza a tela
+}
+
+// Função para cadastrar preventiva
+function cadastrarPreventivaAdm(placa) {
+    const tipoPreventiva = prompt("Informe o tipo de Preventiva:");
+    const dataPreventiva = prompt("Informe a data da Preventiva:");
+    const proximaPreventiva = prompt("Informe a data da próxima Preventiva:");
+
+    if (tipoPreventiva && dataPreventiva && proximaPreventiva) {
         if (!preventivas[placa]) {
             preventivas[placa] = [];
         }
-        preventivas[placa].push({ preventiva, data, proximaPreventiva });
-        salvarPreventivas();
+        preventivas[placa].push({ tipo: tipoPreventiva, data: dataPreventiva, proxima: proximaPreventiva });
+        salvarDados();
         alert("Preventiva cadastrada com sucesso!");
     }
 }
 
-// Função para mostrar o status da preventiva
+// Função para mostrar as preventivas cadastradas
 function mostrarStatusPreventivaPorPlaca(placa) {
     const preventivaList = document.createElement("div");
     preventivaList.classList.add("preventiva-list");
@@ -114,13 +171,12 @@ function mostrarStatusPreventivaPorPlaca(placa) {
     } else {
         preventivasPlaca.forEach((preventiva, index) => {
             const p = document.createElement("p");
-            p.innerText = `Tipo: ${preventiva.preventiva} | Data: ${preventiva.data} | Próxima Preventiva: ${preventiva.proximaPreventiva}`;
-            const concluirButton = document.createElement("button");
-            concluirButton.classList.add("preventiva-button");
-            concluirButton.innerText = "Encerrar Preventiva";
-            concluirButton.onclick = () => concluirPreventiva(placa, index);
+            p.innerText = `Preventiva: ${preventiva.tipo} | Data: ${preventiva.data} | Próxima: ${preventiva.proxima}`;
+            const encerrarButton = document.createElement("button");
+            encerrarButton.innerText = "Encerrar Preventiva";
+            encerrarButton.onclick = () => encerrarPreventiva(placa, index);
             preventivaList.appendChild(p);
-            preventivaList.appendChild(concluirButton);
+            preventivaList.appendChild(encerrarButton);
         });
     }
 
@@ -128,17 +184,12 @@ function mostrarStatusPreventivaPorPlaca(placa) {
     document.getElementById("status-preventiva-list").appendChild(preventivaList);
 }
 
-// Função para encerrar a preventiva
-function concluirPreventiva(placa, index) {
-    preventivas[placa].splice(index, 1);  // Remove a preventiva da lista
-    salvarPreventivas();
-    mostrarStatusPreventivaPorPlaca(placa);  // Atualiza a lista
+// Função para encerrar (remover) a preventiva
+function encerrarPreventiva(placa, index) {
+    preventivas[placa].splice(index, 1);  // Remove a preventiva
+    salvarDados();  // Salva as mudanças
+    mostrarStatusPreventivaPorPlaca(placa);  // Atualiza a tela
 }
 
-// Carregar as preventivas ao iniciar
-carregarPreventivas();
-
-
-
-
-
+// Carregar os dados ao iniciar
+carregarDados();
