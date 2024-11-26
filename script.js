@@ -30,7 +30,7 @@ function salvarDados() {
     localStorage.setItem('preventivas', JSON.stringify(preventivas));
 }
 
-// Inicializar as placas para interação
+// Carregar as placas nas telas
 function inicializarPlacas() {
     // Tela de Cadastrar Manutenção
     const placasCadastroDiv = document.getElementById("placas-cadastro");
@@ -193,6 +193,7 @@ function encerrarPreventiva(placa, index) {
 
 // Carregar os dados ao iniciar
 carregarDados();
+
 
 
 
